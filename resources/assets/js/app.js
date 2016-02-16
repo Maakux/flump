@@ -1,6 +1,6 @@
 import React from "react";
-import ReactDom from "react-dom";
-import CreateFile from "./views/File/UploadFile";
+import ReactDOM from "react-dom";
+import UploadFile from "./views/File/UploadFile";
 import { Router, Route, Link } from "react-router";
 import createBrowserHistory from "history/lib/createBrowserHistory";
 

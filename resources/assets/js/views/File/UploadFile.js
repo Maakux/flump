@@ -13,11 +13,14 @@ class UploadFile extends React.Component {
 					<div className="tagline">the best temporary online file store...</div>
 				</div>
 				<div className="file-upload">
-					
+					<form method="post" action="/files" encType="multipart/form-data">
+						<input type="file" name="file" id="file" />
+						<button type="submit">Upload</button>
+					</form>
 				</div>
 			</div>
 		);
 	}
 }
 
-export default UploadFile
+export default UploadFile;
