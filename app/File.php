@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Storage;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -26,21 +27,26 @@ class File extends Model
 	 * Upload the file, and create a new record in the
 	 * database.
 	 *
-	 * @param Uploaded $file
+	 * @param Uploaded $uploadedFile
 	 * @return \App\File
 	 */
-	public static function upload(UploadedFile $file)
+	public static function upload(UploadedFile $uploadedFile)
 	{
 		$file = static::create([
-			'original_name' => $file->getClientOriginalName(),
-			'extension' => $file->getClientOriginalExtension(),
-			'mime_type' => $file->getMimeType(),
-			'size' => $file->getClientSize(),
+			'original_name' => $uploadedFile->getClientOriginalName(),
+			'extension' => $uploadedFile->getClientOriginalExtension(),
+			'mime_type' => $uploadedFile->getMimeType(),
+			'size' => $uploadedFile->getClientSize(),
 			'expire_date' => Carbon::now()->addDay()
 		]);
 
-		$file->name = sha1($file->id);
+		$file->name = time() . '.' . $file->extension;
 		$file->save();
+
+		Storage::disk('local')->put(
+			'files/' . $file->name,
+			file_get_contents($uploadedFile)
+		);
 
 		return $file;
 	}
