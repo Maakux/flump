@@ -20,7 +20,7 @@ class CreateFilesTable extends Migration
             $table->string('mime_type');
             $table->integer('size');
             $table->integer('downloads');
-            $table->timestamp('expire_date');
+            $table->timestamp('expire_date')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->useCurrent();
         });
