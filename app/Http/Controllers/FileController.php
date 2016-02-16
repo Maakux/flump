@@ -55,4 +55,20 @@ class FileController extends Controller
 
 		return $this->respond($file->toArray());
 	}
+
+	/**
+	 * Download the file.
+	 *
+	 * @param string $file
+	 * @return \Illuminate\Http\Response
+	 */
+	public function postDownloadFile($file)
+	{
+		$file = File::findByName($file);
+
+		$file->downloads++;
+		$file->save();
+
+		return $this->respond($file->toArray());
+	}
 }
