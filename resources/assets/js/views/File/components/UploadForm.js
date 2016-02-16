@@ -34,7 +34,7 @@ class UploadForm extends React.Component {
 			type: "POST",
 			success: function(response) {
 				var protocol = window.location.protocol + "//";
-				var url = window.location.host + "/files/" + response.short_name;
+				var url = window.location.host + "/files/" + response.name;
 
 				window.location.replace(protocol + url);
 			},
