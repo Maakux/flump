@@ -8,6 +8,11 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class File extends Model
 {
+	/**
+	 * The attributes that are mass assignable.
+	 *
+	 * @var array
+	 */
 	protected $fillable = [
 		'name',
 		'original_name',
@@ -17,6 +22,13 @@ class File extends Model
 		'expire_date'
 	];
 
+	/**
+	 * Upload the file, and create a new record in the
+	 * database.
+	 *
+	 * @param Uploaded $file
+	 * @return \App\File
+	 */
 	public static function upload(UploadedFile $file)
 	{
 		$file = static::create([
