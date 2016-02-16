@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use Storage;
 use App\File;
 use App\Http\Requests;
+use App\Traits\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class FileController extends Controller
 {
+	use JsonResponse;
 
 	/**
 	 * The current request.
@@ -38,6 +40,19 @@ class FileController extends Controller
 	{
 		$file = File::upload($this->request->file('file'));
 
-		return response()->json($file->toArray());
+		return $this->respondWithCreated($file->toArray());
+	}
+
+	/**
+	 * Get the file by the given short name.
+	 *
+	 * @param string $file
+	 * @return \Illuminate\Http\Response
+	 */
+	public function getFile($file)
+	{
+		$file = File::findByName($file);
+
+		return $this->respond($file->toArray());
 	}
 }
