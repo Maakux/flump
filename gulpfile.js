@@ -8,7 +8,7 @@ var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 
 gulp.task('less', function() {
-	return gulp.src('./resources/assets/less/app.less')
+	return gulp.src('./resources/assets/less/flump.less')
 				.pipe(less())
 				.pipe(minify({ compatibility: 'ie8' }))
 				.pipe(gulp.dest('./public/css'));

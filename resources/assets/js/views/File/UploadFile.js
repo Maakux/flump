@@ -11,7 +11,7 @@ class UploadFile extends React.Component {
 			<div>
 			{
 				this.props.children ||
-				<div>
+				<div className="flump-main">
 					<div className="landing-title">
 						<div className="title">flump</div>
 						<div className="tagline">the best temporary online file store...</div>

@@ -71,8 +71,12 @@ class UploadForm extends React.Component {
 					action="/api/files"
 					encType="multipart/form-data"
 					onSubmit={this.handleSubmit.bind(this)}>
-				<input type="file" name="file" onChange={this.handleFile.bind(this)} />
-				{button}
+				<div className="input-field">
+					<input type="file" name="file" onChange={this.handleFile.bind(this)} />
+				</div>
+				<div className="input-field">
+					{button}
+				</div>
 			</form>
 		);
 	}
