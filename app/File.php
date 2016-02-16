@@ -53,6 +53,13 @@ class File extends Model
 		return $file;
 	}
 
+	/**
+	 * Find a file by its name.
+	 *
+	 * @param Builder $query
+	 * @param string $name
+	 * @return \App\File
+	 */
 	public function scopeFindByName($query, $name)
 	{
 		return $query->where('short_name', '=', $name)->firstOrFail();
