@@ -1,7 +1,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8"/>
-		<title>flump - the best temporary file store...</title>
+		<title>flump - simple temporary file storage</title>
 		<link rel="stylesheet" type="text/css" href="{{ URL::to('css/flump.css') }}"/>
 		<link rel="stylesheet" type="text/css" href="{{ URL::to('css/fonts.css') }}">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

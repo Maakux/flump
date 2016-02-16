@@ -14,7 +14,7 @@ class UploadFile extends React.Component {
 				<div className="fadeInUp">
 					<div className="landing-title">
 						<div className="title">flump</div>
-						<div className="tagline">the best temporary online file store...</div>
+						<div className="tagline">simple temporary file storage</div>
 					</div>
 					<div className="file-upload">
 						<UploadForm />
