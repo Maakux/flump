@@ -16,6 +16,7 @@ class File extends Model
 	 */
 	protected $fillable = [
 		'name',
+		'short_name',
 		'original_name',
 		'extension',
 		'mime_type',
@@ -40,7 +41,8 @@ class File extends Model
 			'expire_date' => Carbon::now()->addDay()
 		]);
 
-		$file->name = time() . '.' . $file->extension;
+		$file->name = sha1($file->id);
+		$file->short_name = substr($file->name, 0, 7);
 		$file->save();
 
 		Storage::disk('local')->put(
@@ -49,5 +51,10 @@ class File extends Model
 		);
 
 		return $file;
+	}
+
+	public function scopeFindByName($query, $name)
+	{
+		return $query->where('short_name', '=', $name)->firstOrFail();
 	}
 }
