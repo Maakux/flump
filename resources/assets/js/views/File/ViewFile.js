@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 
 class ViewFile extends React.Component {
 	constructor(props) {
@@ -30,15 +31,43 @@ class ViewFile extends React.Component {
 		});
 	}
 
+	handleDownload(e) {
+		var file = this.props.params.file;
+
+		e.preventDefault();
+
+		$.ajax({
+			url: "/api/files/" + file + "/download",
+			type: "POST",
+			success: function(response) {
+				console.log(response)
+			},
+			error: function(xhr, status, error) {
+				console.log(error);
+			}
+		});
+	}
+
 	render() {
 		if (this.state.file !== null) {
+			var file = this.state.file;
+
+			var created_at = moment(file.created_at).fromNow();
+			var expire_date = moment(file.expire_date).fromNow();
+
 			return (
-				<div className="file-info fadeInUp">
-					<div className="name">{this.state.file.original_name}</div>
-					<div className="">
-						This file was uploaded {this.state.file.created_at}, and will be removed {this.state.file.expire_date}
+				<div className="file fadeInUp">
+					<div className="file-icon">
+						<i className="icon-file"></i>
 					</div>
-					<a className="download">Download File</a>
+					<div className="name">{file.original_name}</div>
+					<div className="info">
+						This file was uploaded {created_at}, and will be removed {expire_date}.
+					</div>
+					<button	className="download"
+							onClick={this.handleDownload.bind(this)} >
+							Download File
+					</button>
 				</div>
 			);
 		}
