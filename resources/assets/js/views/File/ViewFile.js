@@ -31,11 +31,9 @@ class ViewFile extends React.Component {
 	}
 
 	render() {
-		console.log(this.state.file);
-
 		if (this.state.file !== null) {
 			return (
-				<div className="file-info">
+				<div className="file-info fadeInUp">
 					<div className="name">{this.state.file.original_name}</div>
 					<div className="">
 						This file was uploaded {this.state.file.created_at}, and will be removed {this.state.file.expire_date}
@@ -46,7 +44,9 @@ class ViewFile extends React.Component {
 		}
 
 		return (
-			<div>loading...</div>
+			<div className="loading loading-center">
+				<div className="loading-icon"></div>
+			</div>
 		);
 	}
 }

@@ -43,7 +43,7 @@ body {
 			width: 10%;
 			border-radius: 3px;
 			color: #fff;
-			background: #0c9b37;
+			background: #0ab146;
 			transition: all .3s ease-in;
 		}
 
@@ -58,7 +58,48 @@ body {
 
 		button:hover {
 			box-shadow: 3px 7px 10px 0px rgba(0, 0, 0, 0.25);
-			background: #1dac48;
 		}
+	}
+}
+.loading {
+	.loading-icon {
+		margin: 0 auto;
+		height: 100px;
+		width: 100px;
+		animation: rotation 1s infinite linear;
+		border: solid 3px #0ab146;
+		border-top-color: rgba(0, 0, 0, 0);
+		border-radius: 100%;
+	}
+
+	.loading-center {
+		margin-top: 100px;
+	}
+
+	.loading-message {
+		margin: 0 auto;
+		margin-top: 50px;
+		width: 50%;
+		font-size: 16pt;
+		text-align: center;
+		color: #ccc;
+	}
+}
+@keyframes rotation {
+	to {
+		transform: rotate(360deg);
+	}
+}
+.fadeInUp {
+	animation: fadeInUp 1s;
+}
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translate3d(0, 20%, 0);
+	}
+	to {
+		opacity: 1;
+		transform: none;
 	}
 }

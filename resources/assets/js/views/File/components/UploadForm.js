@@ -61,7 +61,14 @@ class UploadForm extends React.Component {
 
 	renderForm() {
 		if (this.state.isSubmitting) {
-			return <div>Uploading...</div>;
+			return (
+				<div className="loading fadeInUp">
+					<div className="loading-icon"></div>
+					<div className="loading-message">
+						Uploading...
+					</div>
+				</div>
+			);
 		}
 		
 		var button = this.renderButton();
