@@ -16,8 +16,8 @@ class CreateFilesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('original_name');
-            $table->string('path');
-            $table->string('type');
+            $table->string('extension');
+            $table->string('mime_type');
             $table->integer('size');
             $table->integer('downloads');
             $table->timestamp('expire_date');
