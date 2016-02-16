@@ -1,4 +1,5 @@
 import React from "react";
+import UploadForm from "./components/UploadForm";
 
 class UploadFile extends React.Component {
 	constructor(props) {
@@ -8,16 +9,18 @@ class UploadFile extends React.Component {
 	render() {
 		return (
 			<div>
-				<div className="landing-title">
-					<div className="title">flump</div>
-					<div className="tagline">the best temporary online file store...</div>
+			{
+				this.props.children ||
+				<div>
+					<div className="landing-title">
+						<div className="title">flump</div>
+						<div className="tagline">the best temporary online file store...</div>
+					</div>
+					<div className="file-upload">
+						<UploadForm />
+					</div>
 				</div>
-				<div className="file-upload">
-					<form method="post" action="/files" encType="multipart/form-data">
-						<input type="file" name="file" id="file" />
-						<button type="submit">Upload</button>
-					</form>
-				</div>
+			}
 			</div>
 		);
 	}
