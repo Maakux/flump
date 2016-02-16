@@ -16,7 +16,7 @@ service php5-fpm restart
 
 block="server {
 	listen 80;
-	server_name 192.168.10.30;
+	server_name 192.168.10.30, flump.dev;
 	root \"/home/vagrant/web/flump.io/public\";
 
 	index index.html index.htm index.php;
