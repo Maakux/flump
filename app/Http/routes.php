@@ -6,13 +6,6 @@ use App\File;
 Route::group(['middleware' => 'web'], function() {
 	Route::group(['domain' => 'f.flump.dev'], function() {
 		Route::get('/{file}', 'FileController@getRawFile');
-		/*Route::get('/{file}', function($domain, $file) {
-			$file = storage_path('app/files/') . $file;
-
-			header("Content-Type: image/png");
-
-			return readfile($file);
-		});*/
 	});
 
 	Route::get('/', 'PagesController@getHome');
