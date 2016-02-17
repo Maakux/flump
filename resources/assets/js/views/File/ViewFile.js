@@ -64,10 +64,9 @@ class ViewFile extends React.Component {
 					<div className="info">
 						This file was uploaded {created_at}, and will be removed {expire_date}.
 					</div>
-					<button	className="download"
-							onClick={this.handleDownload.bind(this)} >
-							Download File
-					</button>
+					<a	className="download" href={"/files/" + this.state.file.short_hash + "/download"}>
+						Download File
+					</a>
 				</div>
 			);
 		}

@@ -49,7 +49,7 @@ class File extends Model
 			$file->save();
 
 			Storage::disk('local')->put(
-				'files/' . $file->hash . '.' . $file->extension,
+				'files/' . $file->short_hash . '.' . $file->extension,
 				file_get_contents($tmp)
 			);
 

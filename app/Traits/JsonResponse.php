@@ -2,6 +2,8 @@
 
 namespace App\Traits;
 
+use Storage;
+
 trait JsonResponse
 {
 	/**
@@ -30,6 +32,13 @@ trait JsonResponse
 		$data['http_code'] = 201;
 
 		return response()->json($data, 201, $headers);
+	}
+
+	public function respondWithDownload(array $data, array $headers = [])
+	{
+		$data['http_code'] = 204;
+
+		return response()->download(storage_path('app/files/') . $data['short_hash'] . '.' . $data['extension']);
 	}
 
 	/**

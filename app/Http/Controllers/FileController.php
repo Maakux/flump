@@ -66,8 +66,8 @@ class FileController extends Controller
 	 */
 	public function postDownloadFile($file)
 	{
-		$file = File::findByName($file);
+		$file = File::findByHash($file);
 
-		return $this->respond($file->toArray());
+		return $this->respondWithDownload($file->toArray());
 	}
 }
