@@ -53,7 +53,7 @@ class FileController extends Controller
 	 */
 	public function getFile($file)
 	{
-		$file = File::findByName($file);
+		$file = File::findByHash($file);
 
 		return $this->respond($file->toArray());
 	}
