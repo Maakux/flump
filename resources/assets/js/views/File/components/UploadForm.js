@@ -75,7 +75,7 @@ class UploadForm extends React.Component {
 	renderUploads() {
 		return this.state.uploads.map(function(file, i) {
 			return (
-				<div key={i}>{file.name}.{file.extension} uploaded!</div>
+				<div key={i} className="fadeInUp">{file.name}.{file.extension} uploaded!</div>
 			);
 		});
 	}
