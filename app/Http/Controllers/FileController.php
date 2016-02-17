@@ -40,8 +40,6 @@ class FileController extends Controller
 	{
 		$files = File::upload($this->request->allfiles());
 
-		//dd($files);
-
 		return $this->respondWithCreated($files);
 	}
 
