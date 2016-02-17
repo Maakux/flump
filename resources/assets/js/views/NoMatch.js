@@ -7,7 +7,7 @@ class NoMatch extends React.Component {
 
 	render() {
 		return (
-			<div className="not-found">
+			<div className="not-found fadeInUp">
 				<i className="icon-file"></i>
 				<div className="message">no files here friend :)</div>
 			</div>

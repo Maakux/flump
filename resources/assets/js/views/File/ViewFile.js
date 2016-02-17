@@ -1,5 +1,6 @@
 import React from "react";
 import moment from "moment";
+import NoMatch from "../NoMatch";
 
 class ViewFile extends React.Component {
 	constructor(props) {
@@ -26,21 +27,25 @@ class ViewFile extends React.Component {
 				this.setState({ file: response });
 			}.bind(this),
 			error: function(xhr, status, error) {
-				console.log(xhr)
-			}
+				this.setState({ file: {} });
+			}.bind(this)
 		});
 	}
 
 	render() {
+		console.log(this.state);
+
 		if (this.state.file !== null) {
+			if (Object.keys(this.state.file).length === 0) {
+				return <NoMatch />;
+			}
+
 			var file = this.state.file;
 
 			var protocol = window.location.protocol + "//";
 			var host = "f." + window.location.host;
 
 			var fileLink = protocol + host + "/" + file.name;
-
-			console.log(fileLink);
 
 			var created_at = moment(file.created_at).fromNow();
 			var expire_date = moment(file.expire_date).fromNow();

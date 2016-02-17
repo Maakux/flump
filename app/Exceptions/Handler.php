@@ -51,7 +51,7 @@ class Handler extends ExceptionHandler
     {
         if ($e instanceof ModelNotFoundException)
         {
-            $message['message'] = 'The page you\'re looking for could not be found...';
+            $message['message'] = 'no files here friend :)';
 
             return $this->respondWithNotFound($message);
         }
