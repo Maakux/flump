@@ -16,6 +16,7 @@ class File extends Model
 	 */
 	protected $fillable = [
 		'name',
+		'original_name',
 		'hash',
 		'extension',
 		'mime_type',
@@ -37,19 +38,19 @@ class File extends Model
 		foreach ($uploadedFiles["file"] as $tmp)
 		{
 			$file = static::create([
-				'name' => $tmp->getClientOriginalName(),
+				'original_name' => $tmp->getClientOriginalName(),
 				'extension' => $tmp->getClientOriginalExtension(),
 				'mime_type' => $tmp->getMimeType(),
 				'size' => $tmp->getClientSize(),
 				'expire_date' => Carbon::now()->addDay()
 			]);
 
-			$file->hash = sha1($file->id);
-			$file->short_hash = substr($file->hash, 0, 7);
+			$file->hash = substr(sha1($file->id), 0, 7);
+			$file->name = $file->hash . '.' . $file->extension;
 			$file->save();
 
 			Storage::disk('local')->put(
-				'files/' . $file->short_hash . '.' . $file->extension,
+				'files/' . $file->hash . '.' . $file->extension,
 				file_get_contents($tmp)
 			);
 
@@ -68,6 +69,6 @@ class File extends Model
 	 */
 	public function scopeFindByHash($query, $hash)
 	{
-		return $query->where('short_hash', '=', $hash)->firstOrFail();
+		return $query->where('hash', '=', $hash)->firstOrFail();
 	}
 }

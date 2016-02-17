@@ -2,9 +2,7 @@
 
 namespace App\Traits;
 
-use Storage;
-
-trait JsonResponse
+trait Responsible
 {
 	/**
 	 * Respond with a 200 OK HTTP status code.
@@ -32,6 +30,13 @@ trait JsonResponse
 		$data['http_code'] = 201;
 
 		return response()->json($data, 201, $headers);
+	}
+
+	public function respondWithFile($path, $mime, array $headers = [])
+	{
+		header('Content-Type: ' . $mime);
+
+		return readfile($path);
 	}
 
 	public function respondWithDownload(array $data, array $headers = [])

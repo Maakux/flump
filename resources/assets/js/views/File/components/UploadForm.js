@@ -75,12 +75,12 @@ class UploadForm extends React.Component {
 
 	renderUploads() {
 		return this.state.uploads.map(function(file, i) {
-			var link = "/files/" + file.short_hash;
+			var link = "/files/" + file.hash;
 
 			return (
 				<li key={i} className="uploaded-item fadeInUp">
 					<i className="icon-check"></i>
-					{file.name} uploaded!
+					{file.original_name} uploaded!
 					<Link to={link}>View File</Link>
 				</li>
 			);

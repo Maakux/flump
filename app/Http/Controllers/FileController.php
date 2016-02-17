@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use Storage;
 use App\File;
 use App\Http\Requests;
-use App\Traits\JsonResponse;
+use App\Traits\Responsible;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class FileController extends Controller
 {
-	use JsonResponse;
+	use Responsible;
 
 	/**
 	 * The current request.
@@ -56,6 +56,25 @@ class FileController extends Controller
 		$file = File::findByHash($file);
 
 		return $this->respond($file->toArray());
+	}
+
+	/**
+	 * Get the raw file.
+	 *
+	 * @param string $file
+	 * @return \Illuminate\Http\Response
+	 */
+	public function getRawFile($file)
+	{
+		$hash = explode('.', $file)[0];
+
+		Storage::disk('local')->get('files/' . $file);
+
+		$filePath = storage_path('app/files/') . $file;
+
+		$file = File::findByHash($hash);
+
+		return $this->respondWithFile($filePath, $file->mime_type);
 	}
 
 	/**

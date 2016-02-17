@@ -60,11 +60,11 @@ class ViewFile extends React.Component {
 					<div className="file-icon">
 						<i className="icon-file"></i>
 					</div>
-					<div className="name">File: {file.name}</div>
+					<div className="name">File: {file.original_name}</div>
 					<div className="info">
 						This file was uploaded {created_at}, and will be removed {expire_date}.
 					</div>
-					<a	className="download" href={"/files/" + this.state.file.short_hash + "/download"}>
+					<a	className="download" href={"/files/" + this.state.file.name + "/download"}>
 						Download File
 					</a>
 				</div>

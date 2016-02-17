@@ -3,16 +3,17 @@
 namespace App\Exceptions;
 
 use Exception;
-use App\Traits\JsonResponse;
+use App\Traits\Responsible;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
-    use JsonResponse;
+    use Responsible;
 
     /**
      * A list of the exception types that should not be reported.
@@ -53,6 +54,11 @@ class Handler extends ExceptionHandler
             $message['message'] = 'The page you\'re looking for could not be found...';
 
             return $this->respondWithNotFound($message);
+        }
+
+        if ($e instanceof FileNotFoundException)
+        {
+            return 404;
         }
 
         return parent::render($request, $e);
