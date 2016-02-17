@@ -1,8 +1,5 @@
 <?php
 
-//use Storage;
-use App\File;
-
 Route::group(['middleware' => 'web'], function() {
 	Route::group(['domain' => 'f.flump.dev'], function() {
 		Route::get('/{file}', 'FileController@getRawFile');
@@ -15,6 +12,4 @@ Route::group(['middleware' => 'web'], function() {
 	Route::get('/files/{file}/download', 'FileController@postDownloadFile');
 
 	Route::get('{any}', 'PagesController@getHome')->where('any', '.*');
-
-	
 });
