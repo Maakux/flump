@@ -16,7 +16,6 @@ class File extends Model
 	 */
 	protected $fillable = [
 		'name',
-		'original_name',
 		'extension',
 		'mime_type',
 		'size',
@@ -33,7 +32,6 @@ class File extends Model
 	public static function upload(UploadedFile $uploadedFile)
 	{
 		$file = static::create([
-			'original_name' => $uploadedFile->getClientOriginalName(),
 			'extension' => $uploadedFile->getClientOriginalExtension(),
 			'mime_type' => $uploadedFile->getMimeType(),
 			'size' => $uploadedFile->getClientSize(),
