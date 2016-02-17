@@ -43,7 +43,7 @@ trait Responsible
 	{
 		$data['http_code'] = 204;
 
-		return response()->download(storage_path('app/files/') . $data['short_hash'] . '.' . $data['extension']);
+		return response()->download(storage_path('app/files/') . $data['name']);
 	}
 
 	/**
