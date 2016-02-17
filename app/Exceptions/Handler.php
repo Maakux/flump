@@ -58,7 +58,7 @@ class Handler extends ExceptionHandler
 
         if ($e instanceof FileNotFoundException)
         {
-            return 404;
+			return view('errors.404');
         }
 
         return parent::render($request, $e);
