@@ -31,40 +31,30 @@ class ViewFile extends React.Component {
 		});
 	}
 
-	handleDownload(e) {
-		var file = this.props.params.file;
-
-		e.preventDefault();
-
-		$.ajax({
-			url: "/api/files/" + file + "/download",
-			type: "POST",
-			success: function(response) {
-				console.log(response)
-			},
-			error: function(xhr, status, error) {
-				console.log(error);
-			}
-		});
-	}
-
 	render() {
 		if (this.state.file !== null) {
 			var file = this.state.file;
+
+			var protocol = window.location.protocol + "//";
+			var host = "f." + window.location.host;
+
+			var fileLink = protocol + host + "/" + file.name;
+
+			console.log(fileLink);
 
 			var created_at = moment(file.created_at).fromNow();
 			var expire_date = moment(file.expire_date).fromNow();
 
 			return (
 				<div className="file fadeInUp">
-					<div className="file-icon">
+					<a className="view-file" href={fileLink}>
 						<i className="icon-file"></i>
-					</div>
+					</a>
 					<div className="name">File: {file.original_name}</div>
 					<div className="info">
 						This file was uploaded {created_at}, and will be removed {expire_date}.
 					</div>
-					<a	className="download" href={"/files/" + this.state.file.name + "/download"}>
+					<a href={"/files/" + this.state.file.hash + "/download"}>
 						Download File
 					</a>
 				</div>

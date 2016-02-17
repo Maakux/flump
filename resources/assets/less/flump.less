@@ -103,9 +103,9 @@ body {
 			margin: 20px;
 		}
 
-		.download {
+		a {
 			display: inline-block;
-			margin-top: 20px;
+			margin: 20px;
 			outline: none;
 			border: none;
 			cursor: pointer;
@@ -119,15 +119,12 @@ body {
 			text-decoration: none;
 		}
 
-		.download:disabled {
-			cursor: not-allowed;
-			background: #aaa;
+		a.view-file {
+			font-size: 35pt;
+			border-radius: 100%;
 		}
 
-		.download:hover:disabled {
-			background: #aaa;
-		}
-		.download:hover {
+		a:hover {
 			box-shadow: 3px 7px 10px 0px rgba(0, 0, 0, 0.25);
 		}
 	}
