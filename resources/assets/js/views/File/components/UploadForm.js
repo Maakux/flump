@@ -5,53 +5,66 @@ class UploadForm extends React.Component {
 		super(props)
 
 		this.state = {
-			isValid: false,
-			isSubmitting: false,
-			fileData: null
+			files: [],
+			uploads: [],
+			dropzoneClass: "dropzone",
+			dropzoneText: "Select or drop files to upload."
 		};
 	}
 
-	handleSubmit(e) {
-		e.preventDefault();
-
-		this.setState({ isSubmitting: true });
-
-		$.ajaxSetup({
-	        headers: {
-	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-	        }
-		});
-
-		var data = new FormData();
-
-		data.append("file", this.state.fileData);
-
-		$.ajax({
-			url: "/api/files",
-			data: data,
-			processData: false,
-			contentType: false,
-			type: "POST",
-			success: function(response) {
-				var protocol = window.location.protocol + "//";
-				var url = window.location.host + "/files/" + response.name;
-
-				window.location.replace(protocol + url);
-			},
-			error: function(xhr, status, error) {
-				console.log(error);
-			}
-		});
+	handleFile(e) {
+		this.handleUpload(e.target.files);
 	}
 
-	handleFile(e) {
-		var file = e.target.files[0];
+	handleClick(e) {
+		this.refs.file.click();
+	}
 
-		this.setState({ fileData: file });
+	handleDragOver(e) {
+		e.preventDefault();
+
+		this.setState({ dropzoneText: "Drop the files to upload." });
+
+		return false;
+	}
+
+	handleDragLeave(e) {
+		this.setState({ dropzoneText: "Select or drop files to upload." });
+
+		return false;
+	}
+
+	handleOnDrop(e) {
+		e.preventDefault();
+
+		this.setState({ dropzoneText: "Select or drop files to upload." });
+
+		this.handleUpload(e.dataTransfer.files);
+	}
+
+	handleUpload(files) {
+		var formData = new FormData();
+		var xhr = new XMLHttpRequest();
+		var self = this;
+
+		for (var i = 0; i < files.length; i++) {
+			formData.append("file[]", files[i]);
+		}
+
+		xhr.open("POST", "/api/files");
+		xhr.send(formData);
+
+		xhr.onload = function() {
+			var response = JSON.parse(this.responseText);
+
+			var uploads = self.state.uploads.concat(response.data);
+
+			self.setState({ uploads: uploads });
+		}
 	}
 
 	renderButton() {
-		if (this.state.fileData === null ||
+		if (this.state.formData === null ||
 			this.state.isSubmitting) {
 			return <button type="submit" disabled>Upload</button>;
 		}
@@ -59,31 +72,36 @@ class UploadForm extends React.Component {
 		return <button type="submit">Upload</button>;
 	}
 
-	renderForm() {
-		if (this.state.isSubmitting) {
+	renderUploads() {
+		return this.state.uploads.map(function(file, i) {
 			return (
-				<div className="loading fadeInUp">
-					<div className="loading-icon"></div>
-					<div className="loading-message">
-						Uploading...
-					</div>
-				</div>
+				<div key={i}>{file.name}.{file.extension} uploaded!</div>
 			);
-		}
-		
+		});
+	}
+
+	renderForm() {
 		var button = this.renderButton();
+		var uploads = this.renderUploads();
 
 		return (
 			<form 	method="post"
 					action="/api/files"
-					encType="multipart/form-data"
-					onSubmit={this.handleSubmit.bind(this)}>
-				<div className="input-field">
-					<input type="file" name="file" onChange={this.handleFile.bind(this)} />
+					encType="multipart/form-data" >
+				<div	className="dropzone"
+						onDragOver={this.handleDragOver.bind(this)}
+						onDragLeave={this.handleDragLeave.bind(this)}
+						onDrop={this.handleOnDrop.bind(this)} >
+					<a className="icon-upload" onClick={this.handleClick.bind(this)}></a>
+					<div className="message">{this.state.dropzoneText}</div>
 				</div>
-				<div className="input-field">
-					{button}
-				</div>
+				<div className="uploads">{uploads}</div>
+				<input	type="file"
+						ref="file"
+						name="file[]"
+						style={{display: "none"}}
+						onChange={this.handleFile.bind(this)}
+						multiple />
 			</form>
 		);
 	}

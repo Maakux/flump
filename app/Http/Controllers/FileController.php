@@ -38,9 +38,11 @@ class FileController extends Controller
 	 */
 	public function postUploadFile()
 	{
-		$file = File::upload($this->request->file('file'));
+		$files = File::upload($this->request->allfiles());
 
-		return $this->respondWithCreated($file->toArray());
+		//dd($files);
+
+		return $this->respondWithCreated($files);
 	}
 
 	/**

@@ -29,26 +29,33 @@ class File extends Model
 	 * @param Uploaded $uploadedFile
 	 * @return \App\File
 	 */
-	public static function upload(UploadedFile $uploadedFile)
+	public static function upload(array $uploadedFiles)
 	{
-		$file = static::create([
-			'extension' => $uploadedFile->getClientOriginalExtension(),
-			'mime_type' => $uploadedFile->getMimeType(),
-			'size' => $uploadedFile->getClientSize(),
-			'expire_date' => Carbon::now()->addDay()
-		]);
+		$files = [];
 
-		$name = sha1($file->id);
+		foreach ($uploadedFiles["file"] as $tmp)
+		{
+			$file = static::create([
+				'extension' => $tmp->getClientOriginalExtension(),
+				'mime_type' => $tmp->getMimeType(),
+				'size' => $tmp->getClientSize(),
+				'expire_date' => Carbon::now()->addDay()
+			]);
 
-		$file->name = substr($name, 0, 7);
-		$file->save();
+			$name = sha1($file->id);
 
-		Storage::disk('local')->put(
-			'files/' . $file->name . '.' . $file->extension,
-			file_get_contents($uploadedFile)
-		);
+			$file->name = substr($name, 0, 7);
+			$file->save();
 
-		return $file;
+			Storage::disk('local')->put(
+				'files/' . $file->name . '.' . $file->extension,
+				file_get_contents($tmp)
+			);
+
+			$files['data'][] = $file;
+		}
+
+		return $files;
 	}
 
 	/**
