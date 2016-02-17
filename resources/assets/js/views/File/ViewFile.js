@@ -60,7 +60,7 @@ class ViewFile extends React.Component {
 					<div className="file-icon">
 						<i className="icon-file"></i>
 					</div>
-					<div className="name">File: {file.name}.{file.extension}</div>
+					<div className="name">File: {file.name}</div>
 					<div className="info">
 						This file was uploaded {created_at}, and will be removed {expire_date}.
 					</div>

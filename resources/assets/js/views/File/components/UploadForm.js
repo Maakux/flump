@@ -1,4 +1,5 @@
 import React from "react";
+import { Router, Route, Link } from "react-router";
 
 class UploadForm extends React.Component {
 	constructor(props) {
@@ -74,8 +75,14 @@ class UploadForm extends React.Component {
 
 	renderUploads() {
 		return this.state.uploads.map(function(file, i) {
+			var link = "/files/" + file.short_hash;
+
 			return (
-				<div key={i} className="fadeInUp">{file.name}.{file.extension} uploaded!</div>
+				<li key={i} className="uploaded-item fadeInUp">
+					<i className="icon-check"></i>
+					{file.name} uploaded!
+					<Link to={link}>View File</Link>
+				</li>
 			);
 		});
 	}
@@ -95,7 +102,7 @@ class UploadForm extends React.Component {
 					<a className="icon-upload" onClick={this.handleClick.bind(this)}></a>
 					<div className="message">{this.state.dropzoneText}</div>
 				</div>
-				<div className="uploads">{uploads}</div>
+				<ul className="uploads">{uploads}</ul>
 				<input	type="file"
 						ref="file"
 						name="file[]"
