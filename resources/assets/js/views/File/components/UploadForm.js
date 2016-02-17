@@ -8,7 +8,7 @@ class UploadForm extends React.Component {
 		this.state = {
 			files: [],
 			uploads: [],
-			dropzoneClass: "dropzone",
+			discarded: [],
 			dropzoneText: "Select or drop files to upload."
 		};
 	}
@@ -47,10 +47,21 @@ class UploadForm extends React.Component {
 		var formData = new FormData();
 		var xhr = new XMLHttpRequest();
 		var self = this;
+		var discarded = [];
 
 		for (var i = 0; i < files.length; i++) {
-			formData.append("file[]", files[i]);
+			if (files[i].size < 75000000) {
+				formData.append("file[]", files[i]);
+			} else {
+				var file = files[i];
+
+				file.discarded = true;
+
+				discarded.push(files[i]);
+			}
 		}
+
+		var discarded = self.state.discarded.concat(discarded);
 
 		xhr.open("POST", "/api/files");
 		xhr.send(formData);
@@ -58,10 +69,14 @@ class UploadForm extends React.Component {
 		xhr.onload = function() {
 			var response = JSON.parse(this.responseText);
 
-			var uploads = self.state.uploads.concat(response.data);
+			var files = self.state.uploads.concat(response.data);
+			var files = files.concat(discarded);
 
-			self.setState({ uploads: uploads });
+			console.log(files);
+
+			self.setState({ uploads: files });
 		}
+
 	}
 
 	renderButton() {
@@ -77,10 +92,17 @@ class UploadForm extends React.Component {
 		return this.state.uploads.map(function(file, i) {
 			var link = "/files/" + file.hash;
 
+			if (file.discarded) {
+				return (
+					<li key={i} className="file-item fadeInUp">
+						<i className="icon-close"></i> {file.name} discarded!
+					</li>
+				);
+			}
+
 			return (
-				<li key={i} className="uploaded-item fadeInUp">
-					<i className="icon-check"></i>
-					{file.original_name} uploaded!
+				<li key={i} className="file-item fadeInUp">
+					<i className="icon-check"></i> {file.original_name} uploaded!
 					<Link to={link}>View File</Link>
 				</li>
 			);
@@ -102,7 +124,7 @@ class UploadForm extends React.Component {
 					<a className="icon-upload" onClick={this.handleClick.bind(this)}></a>
 					<div className="message">{this.state.dropzoneText}</div>
 				</div>
-				<ul className="uploads">{uploads}</ul>
+				<ul className="files">{uploads}</ul>
 				<input	type="file"
 						ref="file"
 						name="file[]"

@@ -33,9 +33,14 @@ class File extends Model
 	 */
 	public static function upload(array $uploadedFiles)
 	{
-		$files = [];
+		$files['data'] = [];
 
-		foreach ($uploadedFiles["file"] as $tmp)
+		if (array_key_exists('file', $uploadedFiles))
+		{
+			$uploadedFiles = $uploadedFiles['file'];
+		}
+		
+		foreach ($uploadedFiles as $tmp)
 		{
 			$file = static::create([
 				'original_name' => $tmp->getClientOriginalName(),
