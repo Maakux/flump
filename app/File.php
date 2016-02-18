@@ -47,7 +47,7 @@ class File extends Model
 				'extension' => $tmp->getClientOriginalExtension(),
 				'mime_type' => $tmp->getMimeType(),
 				'size' => $tmp->getClientSize(),
-				'expire_date' => Carbon::now()->addDay()
+				'expire_date' => Carbon::now()->addMinute()
 			]);
 
 			$extension = $file->extension === '' ? '' : '.' . $file->extension;
@@ -56,10 +56,7 @@ class File extends Model
 			$file->name = $file->hash . $extension;
 			$file->save();
 
-			Storage::disk('local')->put(
-				'files/' . $file->hash . $extension,
-				file_get_contents($tmp)
-			);
+			Storage::put($file->hash . $extension, file_get_contents($tmp));
 
 			$files['data'][] = $file;
 		}
