@@ -57,25 +57,6 @@ class FileController extends Controller
 	}
 
 	/**
-	 * Get the raw file.
-	 *
-	 * @param string $file
-	 * @return \Illuminate\Http\Response
-	 */
-	public function getRawFile($file)
-	{
-		$hash = explode('.', $file)[0];
-
-		Storage::disk('local')->get('files/' . $file);
-
-		$filePath = storage_path('app/files/') . $file;
-
-		$file = File::findByHash($hash);
-
-		return $this->respondWithFile($filePath, $file->mime_type);
-	}
-
-	/**
 	 * Download the file.
 	 *
 	 * @param string $file

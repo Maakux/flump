@@ -2,8 +2,6 @@
 
 namespace App\Traits;
 
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
-
 trait Responsible
 {
 	/**
@@ -32,19 +30,6 @@ trait Responsible
 		$data['http_code'] = 201;
 
 		return response()->json($data, 201, $headers);
-	}
-
-	public function respondWithFile($path, $mime, array $headers = [])
-	{
-		$response = new BinaryFileResponse($path, 200, $headers, true);
-
-		dd($response);
-
-		$mime = $response->getFile()->getMimeType();
-
-		$response->headers->set('Content-Type', $mime);
-
-		return $response;
 	}
 
 	public function respondWithDownload(array $data, array $headers = [])
