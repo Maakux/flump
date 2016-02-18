@@ -60,7 +60,7 @@ block="server {
 server {
 	listen 80;
 	server_name f.flump.dev;
-	root \"/home/vagrant/web/flump.io/public/storage/app/files\";
+	root \"/home/vagrant/web/flump.io/storage/app/files\";
 
 	charset utf-8;
 
