@@ -72,11 +72,8 @@ class UploadForm extends React.Component {
 			var files = self.state.uploads.concat(response.data);
 			var files = files.concat(discarded);
 
-			console.log(files);
-
 			self.setState({ uploads: files });
 		}
-
 	}
 
 	renderButton() {
