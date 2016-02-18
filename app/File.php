@@ -47,7 +47,7 @@ class File extends Model
 				'extension' => $tmp->getClientOriginalExtension(),
 				'mime_type' => $tmp->getMimeType(),
 				'size' => $tmp->getClientSize(),
-				'expire_date' => Carbon::now()->addMinute()
+				'expire_date' => Carbon::now()->addDay()
 			]);
 
 			$extension = $file->extension === '' ? '' : '.' . $file->extension;
