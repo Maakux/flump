@@ -20,7 +20,7 @@ gulp.task('js', function() {
 			.bundle()
 			.pipe(source('app.js'))
 			.pipe(buffer())
-			//.pipe(uglify())
+			.pipe(uglify())
 			.pipe(gulp.dest('./public/js'));
 });
 
