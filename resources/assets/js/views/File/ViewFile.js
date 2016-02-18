@@ -42,15 +42,7 @@ class ViewFile extends React.Component {
 			var file = this.state.file;
 
 			var protocol = window.location.protocol + "//";
-			var host = window.location.host;
-
-			var host = host.split(".");
-
-			if (host.length === 3) {
-				host[0] = "f";
-			}
-
-			var host = host.join(".");
+			var host = "f." + window.location.host;
 
 			var fileLink = protocol + host + "/" + file.name;
 
