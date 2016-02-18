@@ -49,6 +49,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+        if ($e instanceof HttpException)
+        {
+            return response()->view('errors.' . $e->getStatusCode());
+        }
+
         if ($e instanceof ModelNotFoundException)
         {
             $message['message'] = 'no files here friend :)';
@@ -58,7 +63,7 @@ class Handler extends ExceptionHandler
 
         if ($e instanceof FileNotFoundException)
         {
-			return view('errors.404');
+			return response()->view('errors.404');
         }
 
         return parent::render($request, $e);
