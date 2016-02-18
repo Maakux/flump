@@ -34,8 +34,6 @@ class ViewFile extends React.Component {
 	}
 
 	render() {
-		console.log(this.state);
-
 		if (this.state.file !== null) {
 			if (Object.keys(this.state.file).length === 0) {
 				return <NoMatch />;
@@ -44,7 +42,7 @@ class ViewFile extends React.Component {
 			var file = this.state.file;
 
 			var protocol = window.location.protocol + "//";
-			var host = "f." + window.location.host;
+			var host = window.location.host;
 
 			var fileLink = protocol + host + "/" + file.name;
 

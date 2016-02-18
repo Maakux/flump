@@ -50,12 +50,14 @@ class File extends Model
 				'expire_date' => Carbon::now()->addDay()
 			]);
 
+			$extension = $file->extension === '' ? '' : '.' . $file->extension;
+
 			$file->hash = substr(sha1($file->id), 0, 7);
-			$file->name = $file->hash . '.' . $file->extension;
+			$file->name = $file->hash . $extension;
 			$file->save();
 
 			Storage::disk('local')->put(
-				'files/' . $file->hash . '.' . $file->extension,
+				'files/' . $file->hash . $extension,
 				file_get_contents($tmp)
 			);
 
