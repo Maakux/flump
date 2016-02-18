@@ -13,7 +13,7 @@ class Faq extends React.Component {
 				<div className="question">
 					<h2>what is flump?</h2>
 					<div className="answer">
-						flump is a service that allows you to temporarily store you files.
+						flump is a service that allows you to temporarily store your files.
 					</div>
 				</div>
 				<div className="question">
