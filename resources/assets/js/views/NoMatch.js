@@ -1,4 +1,5 @@
 import React from "react";
+import { Router, Route, Link } from "react-router";
 
 class NoMatch extends React.Component {
 	constructor(props) {
@@ -7,9 +8,14 @@ class NoMatch extends React.Component {
 
 	render() {
 		return (
-			<div className="not-found fadeInUp">
+			<div className="http-error fadeInUp">
 				<i className="icon-file"></i>
 				<div className="message">no files here friend :)</div>
+				<div className="about-links">
+					<Link to="/">flump</Link>
+					<Link to="/faq">faq</Link>
+					<a href="https://github.com/brti/flump">github</a>
+				</div>
 			</div>
 		);
 	}

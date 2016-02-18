@@ -1,6 +1,7 @@
 import React from "react";
 import moment from "moment";
 import NoMatch from "../NoMatch";
+import { Router, Route, Link } from "react-router";
 
 class ViewFile extends React.Component {
 	constructor(props) {
@@ -59,9 +60,14 @@ class ViewFile extends React.Component {
 					<div className="info">
 						This file was uploaded {created_at}, and will be removed {expire_date}.
 					</div>
-					<a href={"/files/" + this.state.file.hash + "/download"}>
+					<a className="download" href={"/files/" + this.state.file.hash + "/download"}>
 						Download File
 					</a>
+					<div className="about-links">
+						<Link to="/">flump</Link>
+						<Link to="/faq">faq</Link>
+						<a href="https://github.com/brti/flump">github</a>
+					</div>
 				</div>
 			);
 		}

@@ -1,5 +1,6 @@
 import React from "react";
 import UploadForm from "./components/UploadForm";
+import { Router, Route, Link } from "react-router";
 
 class UploadFile extends React.Component {
 	constructor(props) {
@@ -19,6 +20,11 @@ class UploadFile extends React.Component {
 					<div className="file-upload">
 						<UploadForm />
 					</div>
+				<div className="about-links">
+					<Link to="/">flump</Link>
+					<Link to="/faq">faq</Link>
+					<a href="https://github.com/brti/flump">github</a>
+				</div>
 				</div>
 			}
 			</div>

@@ -108,11 +108,9 @@ body {
 			margin: 20px;
 		}
 
-		a {
+		a.download {
 			display: inline-block;
 			margin: 20px;
-			outline: none;
-			border: none;
 			cursor: pointer;
 			font-family: "Open Sans", sans-serif;
 			font-size: 12pt;
@@ -125,13 +123,60 @@ body {
 		}
 
 		a.view-file {
+			display: inline-block;
 			font-size: 35pt;
 			border-radius: 100%;
+			background: #0ab146;
+			color: #fff;
+			font-size: 12pt;
+			padding: 20px;
+			text-decoration: none;
 		}
 
-		a:hover {
+		a.download:hover, a.view-file:hover {
 			box-shadow: 3px 7px 10px 0px rgba(0, 0, 0, 0.25);
 		}
+	}
+
+	.faq {
+		margin: 0 auto;
+		width: 40%;
+
+		h1 {
+			font-weight: normal;
+			font-size: 30pt;
+		}
+
+		.question {
+			text-align: left;
+			margin: 30px;
+
+			h2 {
+				margin-bottom: 10px;
+				font-size: 20pt;
+			}
+
+			.answer {
+				color: #aaa;
+				font-size: 12pt;
+			}
+		}
+	}
+}
+.about-links {
+	margin: 20px;
+	text-align: center;
+	font-size: 14pt;
+
+	a {
+		display: inline-block;
+		margin: 10px;
+		text-decoration: none;
+		color: #555;
+	}
+
+	a:hover {
+		color: #aaa;
 	}
 }
 .http-error {

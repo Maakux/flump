@@ -7,7 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="{{ URL::to('css/fonts.css') }}">
 	</head>
 	<body>
-		<div class="http-error">
+		<div class="http-error fadeInUp">
 			<i class="icon-file"></i>
 			<div class="message">no files here friend :)</div>
 		</div>
