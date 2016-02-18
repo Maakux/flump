@@ -46,8 +46,8 @@ class ClearFiles extends Command
         {
             if (Carbon::now() >= $file->expire_date)
             {
-                Storage::delete($file->name);
                 $file->delete();
+                Storage::delete($file->name);
             }
         }
     }
