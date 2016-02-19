@@ -64,11 +64,15 @@ server {
 
 	charset utf-8;
 
-	error_page 404 /../../../resources/views/errors/static/404.html;
-	error_page 403 /../../../resources/views/errors/static/404.html;
+	error_page 404 /404.html;
+	error_page 403 /404.html;
 
 	location / {
 		default_type text/plain;
+	}
+
+	location /404.html {
+		root /home/vagrant/flump.io/resources/views/errors/static/404.html;
 	}
 
 	location = /favicon.ico { access_log off; log_not_found off; }
