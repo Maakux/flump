@@ -76,15 +76,6 @@ class UploadForm extends React.Component {
 		}
 	}
 
-	renderButton() {
-		if (this.state.formData === null ||
-			this.state.isSubmitting) {
-			return <button type="submit" disabled>Upload</button>;
-		}
-
-		return <button type="submit">Upload</button>;
-	}
-
 	renderUploads() {
 		return this.state.uploads.map(function(file, i) {
 			var link = "/files/" + file.hash;
@@ -106,8 +97,7 @@ class UploadForm extends React.Component {
 		});
 	}
 
-	renderForm() {
-		var button = this.renderButton();
+	render() {
 		var uploads = this.renderUploads();
 
 		return (
@@ -129,14 +119,6 @@ class UploadForm extends React.Component {
 						onChange={this.handleFile.bind(this)}
 						multiple />
 			</form>
-		);
-	}
-
-	render() {
-		var form = this.renderForm();
-
-		return (
-			<div>{form}</div>
 		);
 	}
 }
