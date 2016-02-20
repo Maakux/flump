@@ -56,7 +56,7 @@ class File extends Model
 			$file->name = $file->hash . $extension;
 			$file->save();
 
-			Storage::put($file->hash . $extension, file_get_contents($tmp));
+			Storage::put($file->name, file_get_contents($tmp));
 
 			$files['data'][] = $file;
 		}
