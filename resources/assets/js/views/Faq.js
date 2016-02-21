@@ -43,7 +43,7 @@ class Faq extends React.Component {
 				<div className="question">
 					<h2>when will my file be removed?</h2>
 					<div className="answer">
-						all files will be delete 24 hours after they have been uploaded.
+						all files will be deleted 24 hours after they have been uploaded.
 					</div>
 				</div>
 				<div className="about-links">
