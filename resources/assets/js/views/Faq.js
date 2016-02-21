@@ -37,7 +37,7 @@ class Faq extends React.Component {
 				<div className="question">
 					<h2>what file types are accepted?</h2>
 					<div className="answer">
-						as of now all file types are accepted a part from executable files.
+						as of now all file types are accepted apart from executable files.
 					</div>
 				</div>
 				<div className="question">
