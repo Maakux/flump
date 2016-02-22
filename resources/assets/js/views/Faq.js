@@ -29,12 +29,6 @@ class Faq extends React.Component {
 					</div>
 				</div>
 				<div className="question">
-					<h2>why weren't my files uploaded?</h2>
-					<div className="answer">
-						your files will not be uploaded if they either exceed 75MB or if one of them is an executable.
-					</div>
-				</div>
-				<div className="question">
 					<h2>what file types are accepted?</h2>
 					<div className="answer">
 						as of now all file types are accepted apart from executable files.
